@@ -1,0 +1,23 @@
+<!--
+title: Astronomy Tools
+description: Handles telescope, with target management and rendering
+published: true
+date: 2025-05-20T22:54:13.024Z
+tags: 
+editor: ckeditor
+dateCreated: 2025-05-20T22:47:00.341Z
+-->
+
+<p>Describes a reusable suite of sky navigation tools. Notably:</p>
+<ul>
+  <li>“Digital Pair” Telescope</li>
+  <li>Field Rendering</li>
+  <li>Listing and finding targets</li>
+</ul>
+<p>&nbsp;</p>
+<h3>Telescope</h3>
+<p>A “digital pair” object to represent the state of the real-world scope. This keeps track of number of parameters such as key telescope measurements (aperture, focal length, eyepiece, apparent field of view), current position (right ascension/declination) and location (latitude/longitude), and camera offset (two float values). In addition, the class contains a few methods for getting the current position of the scope, taking into account the offset, and getting magnification and limiting magnitude.&nbsp;</p>
+<h3>Field Rendering</h3>
+<p><i>Starplot</i> is used for rendering images of telescope's current field of view. The telescope object is used directly for its parameters to generate the most accurate representation. &nbsp;</p>
+<h3>Target Manager</h3>
+<p>Targets will be loaded from a few different catalogs, such as Messier and NGC. The location of other targets can be acquired through <i>Skyfield</i>, and be set as a target position. Using the previously mentioned telescope object, we can use its position to easily calculate a distance and angle to the target. For the UI, this information can be used to draw an arrow out from the center of the field, with its length representing the distance away.</p>

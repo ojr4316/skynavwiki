@@ -1,0 +1,19 @@
+<!--
+title: Hardware-Specific Implementation
+description: Manages device I/O for using screen, joystick, and buttons
+published: true
+date: 2025-05-20T22:58:03.991Z
+tags: 
+editor: ckeditor
+dateCreated: 2025-05-20T22:51:12.257Z
+-->
+
+<p>Contains hardware specific implementation of device functionality through a <i>1.3" TFT Bonnet screen for a Raspberry Pi.</i>&nbsp;</p>
+<p>This screen is 240x240 pixels, and the header board also has a joystick(with click-in button) and two other buttons. This contains specific setup of hardware, including accessing the board, setting up the screen, and creating a system for using and rendering interfaces. This functionality was split into four classes:</p>
+<ul>
+  <li>Display - Handles image rendering of all UIs</li>
+  <li>Input - Handles input from the joysticks and buttons</li>
+  <li>Screen - Handles physically setting up screen and buttons, and rendering images</li>
+  <li>UI(Manager) - Manages current state, changing how inputs work and what is rendered</li>
+</ul>
+<p>&nbsp;</p>

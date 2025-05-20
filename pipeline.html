@@ -1,0 +1,21 @@
+<!--
+title: Image Processing Pipeline
+description: Multi-step pipeline that captures, processes, and solves images
+published: true
+date: 2025-05-20T22:55:40.285Z
+tags: 
+editor: ckeditor
+dateCreated: 2025-05-20T22:35:02.492Z
+-->
+
+<h3>Main Pipeline&nbsp;</h3>
+<p>The pipeline will be used to orchestrate all of image processing. One thread will control image acquisition, continuously taking new images into the system with dynamically set parameters. Another thread will control image processing, after an image is taken, it is passed through any processing steps before going to the solver. Once a solve result is achieved, using a thread lock the pipeline determines whether the result is more recent, as some processing or solving may happen asynchronously, and if it is, will save its new position.</p>
+<p>This pipeline works with abstract representations of camera, processors such as cleaning or measurement, and solvers. These representations are easy to extend from and switch out if different functionality is desired. Each image will be acquired and processed using these stages to get a coordinate result to represent the telescope's current orientation. This coordinate information will be used for target identification and telescope field of view rendering.</p>
+<p>&nbsp;</p>
+<h3>Camera</h3>
+<p>An abstract representation of a physical camera device. It contains four abstract functions for extension: start, configure, capture, and stop. Start and stop are used to begin and end image capture accordingly, with any necessary setup or tear down taking place. The configure method is used for setting the camera parameter's exposure and gain. Finally, the capture method takes and returns an image.&nbsp;</p>
+<p>Currently, the Astrometry.net solver requires a file path for processing. To remedy this, the abstract camera class contains a save_frame method for temporarily saving the frame for solving. The capture method should use this to save the frame and return a path for the solver.&nbsp;</p>
+<h3>Solver</h3>
+<p>An abstract representation of an astrometric or plate solver. It contains a single method, solve, that takes an image.&nbsp;</p>
+<p>The current implementation is a Python wrapper for Astrometry.net that extends this class.&nbsp;</p>
+<p>The Astrometry.net wrapper adds class variables for command line parameters such as scale, limit, and downsample.&nbsp;</p>
